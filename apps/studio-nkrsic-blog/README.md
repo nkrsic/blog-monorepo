@@ -1,3 +1,8 @@
+# Studio component
+
+This package handles the Sanity studio that can be connected to 
+a front-end app which renders the rich content.
+
 # Sanity Clean Content Studio
 
 Congratulations, you have now installed the Sanity Content Studio, an open-source real-time content editing environment connected to the Sanity backend.
