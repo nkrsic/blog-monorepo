@@ -10,6 +10,7 @@ const BLOG_QUERY = defineQuery(`*[
   ][0]{
   title,
   details,
+  image,
   headline->
 }`);
 
@@ -31,12 +32,13 @@ export default async function blogPage(
         title,
         details,
         headline,
+        image,
     } = blogPost;
 
-    const imageUrl = headline?.photo
-        ? urlFor(headline.photo)
-            .height(310)
+    const imageUrl = image
+        ? urlFor(image)
             .width(550)
+            .fit("clip")
             .quality(80)
             .auto("format")
             .url()

@@ -31,3 +31,7 @@
   h1 {
     font-family: var(--font-lora) !important;
   }
+
+  img {
+    object-fit: contain;
+  }
