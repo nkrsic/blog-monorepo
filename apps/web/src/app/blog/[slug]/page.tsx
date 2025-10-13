@@ -57,6 +57,13 @@ export default async function blogPage(
                             em: ({ children }) => <em>{children}</em>,
                         },
                     }} />
+                <div>
+                    <p>Here is a test paragraph</p>
+                    <ul>
+                        <li>And a list item</li>
+                        <li>And another list item</li>
+                    </ul>
+                </div>
             </div>
         </div>
     );
