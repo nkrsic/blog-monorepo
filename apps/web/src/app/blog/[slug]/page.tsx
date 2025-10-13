@@ -8,6 +8,7 @@ const BLOG_QUERY = defineQuery(`*[
     slug.current == $slug
   ][0]{
   title,
+  details
 }`);
 
 export default async function blogPage(
@@ -26,13 +27,17 @@ export default async function blogPage(
     }
     const {
         title,
+        details,
     } = blogPost;
+
+    console.log(`Details: ${JSON.stringify(details, null, 2)}`);
 
     return (
         <div>
             <h1>
                 Title is {title}.
             </h1>
+            <PortableText value={details ?? []} />
         </div>
     );
 
