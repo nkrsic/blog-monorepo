@@ -34,10 +34,10 @@ export default async function blogPage(
 
     return (
         <div>
-            <h1>
-                Title is {title}.
-            </h1>
-            <div className="blogPostContent max-w-2xl mx-auto my-10">
+            <div className="blogPostContent prose prose-lg max-w-2xl mx-auto my-10">
+                <h1 className="font-bold">
+                    {title}
+                </h1>
                 <PortableText value={details ?? []}
                     components={{
                         block: {
