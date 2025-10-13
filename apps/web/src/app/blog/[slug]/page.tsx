@@ -35,7 +35,7 @@ export default async function blogPage(
     return (
         <div>
             <div className="flex flex-col items-center px-4 sm:px-8 lg:px-8">
-                <div className="prose prose-lg max-w-2xl mx-auto my-10 sm:px-6">
+                <div className="prose lg:prose-lg sm:prose-sm max-w-2xl mx-auto my-10 sm:px-6">
                     <h1 className="font-bold">
                         {title}
                     </h1>
