@@ -12,6 +12,8 @@
     --font-sans: var(--font-geist-sans);
     --font-mono: var(--font-geist-mono);
     --font-serif: var(--font-crimson-pro);
+    --font-family-varela: var(--font-varela);
+    --font-family-lora: var(--font-lora);
   }
 
   @media (prefers-color-scheme: dark) {
@@ -27,5 +29,5 @@
   }
 
   h1 {
-    font-family: var(--font-sans) !important;
+    font-family: var(--font-lora) !important;
   }
