@@ -9,6 +9,6 @@ Currently there is only one app at `apps/studio-nkrsic-blog`.
 ## Typegen
 
 ```
-# in apps/studio
+# in apps/studio-nkrsic-blog
 pnpm run typegen
 ```
