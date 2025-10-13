@@ -34,35 +34,37 @@ export default async function blogPage(
 
     return (
         <div>
-            <div className="blogPostContent prose prose-lg max-w-2xl mx-auto my-10">
-                <h1 className="font-bold">
-                    {title}
-                </h1>
-                <PortableText value={details ?? []}
-                    components={{
-                        block: {
-                            normal: ({ children }) => <p>{children}</p>,
-                            h1: ({ children }) => <h1>{children}</h1>,
-                        },
-                        list: {
-                            bullet: ({ children }) => <ul className="list-disc pl-6 my-2">{children}</ul>,
-                            number: ({ children }) => <ol>{children}</ol>,
-                        },
-                        listItem: {
-                            bullet: ({ children }) => <li className="mb-1">{children}</li>,
-                            number: ({ children }) => <li>{children}</li>,
-                        },
-                        marks: {
-                            strong: ({ children }) => <strong>{children}</strong>,
-                            em: ({ children }) => <em>{children}</em>,
-                        },
-                    }} />
-                <div>
-                    <p>Here is a test paragraph</p>
-                    <ul>
-                        <li>And a list item</li>
-                        <li>And another list item</li>
-                    </ul>
+            <div className="flex flex-col items-center px-4 sm:px-8 lg:px-8">
+                <div className="prose prose-lg max-w-2xl mx-auto my-10 sm:px-6">
+                    <h1 className="font-bold">
+                        {title}
+                    </h1>
+                    <PortableText value={details ?? []}
+                        components={{
+                            block: {
+                                normal: ({ children }) => <p>{children}</p>,
+                                h1: ({ children }) => <h1>{children}</h1>,
+                            },
+                            list: {
+                                bullet: ({ children }) => <ul className="list-disc pl-6 my-2">{children}</ul>,
+                                number: ({ children }) => <ol>{children}</ol>,
+                            },
+                            listItem: {
+                                bullet: ({ children }) => <li className="mb-1">{children}</li>,
+                                number: ({ children }) => <li>{children}</li>,
+                            },
+                            marks: {
+                                strong: ({ children }) => <strong>{children}</strong>,
+                                em: ({ children }) => <em>{children}</em>,
+                            },
+                        }} />
+                    <div>
+                        <p>Here is a test paragraph</p>
+                        <ul>
+                            <li>And a list item</li>
+                            <li>And another list item</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
