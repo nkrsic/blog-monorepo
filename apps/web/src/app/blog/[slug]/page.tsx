@@ -2,13 +2,15 @@ import { defineQuery, PortableText } from "next-sanity";
 import { sanityFetch } from "@/sanity/live";
 import { urlFor } from "@/sanity/image";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 
 const BLOG_QUERY = defineQuery(`*[
     _type == "blogPost" &&
     slug.current == $slug
   ][0]{
   title,
-  details
+  details,
+  headline->
 }`);
 
 export default async function blogPage(
@@ -28,7 +30,17 @@ export default async function blogPage(
     const {
         title,
         details,
+        headline,
     } = blogPost;
+
+    const imageUrl = headline?.photo
+        ? urlFor(headline.photo)
+            .height(310)
+            .width(550)
+            .quality(80)
+            .auto("format")
+            .url()
+        : "https://placehold.co/550x310/png";
 
     console.log(`Details: ${JSON.stringify(details, null, 2)}`);
 
@@ -39,6 +51,15 @@ export default async function blogPage(
                     <h1 className="font-bold">
                         {title}
                     </h1>
+
+                    <Image
+                        src={imageUrl}
+                        alt={"Event"}
+                        className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full"
+                        height="310"
+                        width="550"
+                    />
+
                     <PortableText value={details ?? []}
                         components={{
                             block: {
