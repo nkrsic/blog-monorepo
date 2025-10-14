@@ -38,7 +38,6 @@ export default async function blogPage(
     const imageUrl = image
         ? urlFor(image)
             .width(550)
-            .fit("clip")
             .quality(80)
             .auto("format")
             .url()
