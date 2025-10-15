@@ -3,6 +3,9 @@ import { sanityFetch } from "@/sanity/live";
 import { urlFor } from "@/sanity/image";
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import katex from "katex";
+import "katex/dist/katex.min.css";
+import MathBlock from "../../../components/MathBlock";
 
 const BLOG_QUERY = defineQuery(`*[
     _type == "blogPost" &&
@@ -44,6 +47,21 @@ export default async function blogPage(
         : "https://placehold.co/550x310/png";
 
     console.log(`Details: ${JSON.stringify(details, null, 2)}`);
+
+    // A small helper component for rendering KaTeX math
+    // const MathBlock = ({ value, inline = false }: { value: string; inline?: boolean }) => {
+    //     if (!value) return null;
+    //     const html = katex.renderToString(value, {
+    //         throwOnError: false,
+    //         displayMode: !inline,
+    //     });
+    //     return (
+    //         <span
+    //             className={inline ? "inline-block" : "block my-4"}
+    //             dangerouslySetInnerHTML={{ __html: html }}
+    //         />
+    //     );
+    // };
 
     return (
         <div>
@@ -92,6 +110,9 @@ export default async function blogPage(
                                     whitespace-pre-wrap sm:whitespace-pre break-words bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-4 text-sm leading-relaxed">
                                         <code>{value.code}</code>
                                     </pre>
+                                ),
+                                latex: ({ value }: any) => (
+                                    <MathBlock value={value?.body || value} inline={false} />
                                 ),
                             },
                         }}
