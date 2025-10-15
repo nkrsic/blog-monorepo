@@ -23,6 +23,7 @@
     "react": "^19.1",
     "react-dom": "^19.1",
     "sanity": "^4.10.3",
+    "sanity-plugin-latex-input": "^2.0.6",
     "styled-components": "^6.1.18"
   },
   "devDependencies": {

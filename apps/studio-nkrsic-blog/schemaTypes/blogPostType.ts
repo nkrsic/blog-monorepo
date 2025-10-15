@@ -35,6 +35,7 @@ export const blogPostType = defineType({
                         language: 'javascript', // default language (optional)
                     },
                 },
+                { type: 'latex', title: 'Inline math' },
             ]
         }),
     ],
