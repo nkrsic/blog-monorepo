@@ -88,7 +88,7 @@ export default async function blogPage(
                             // 👇 Added block-level code rendering
                             types: {
                                 code: ({ value }) => (
-                                    <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-4 text-sm leading-relaxed">
+                                    <pre className="whitespace-pre-wrap bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-4 text-sm leading-relaxed">
                                         <code>{value.code}</code>
                                     </pre>
                                 ),
