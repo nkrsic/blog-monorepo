@@ -25,7 +25,17 @@ export const blogPostType = defineType({
         defineField({
             name: 'details',
             type: 'array',
-            of: [{ type: 'block' }]
+            of: [
+                { type: 'block' },
+                {
+                    type: 'code',
+                    title: 'Code Block',
+                    options: {
+                        withFilename: true,
+                        language: 'javascript', // default language (optional)
+                    },
+                },
+            ]
         }),
     ],
 })

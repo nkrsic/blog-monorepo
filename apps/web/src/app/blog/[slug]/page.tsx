@@ -60,8 +60,8 @@ export default async function blogPage(
                         height="310"
                         width="550"
                     />
-
-                    <PortableText value={details ?? []}
+                    <PortableText
+                        value={details ?? []}
                         components={{
                             block: {
                                 normal: ({ children }) => <p>{children}</p>,
@@ -78,8 +78,23 @@ export default async function blogPage(
                             marks: {
                                 strong: ({ children }) => <strong>{children}</strong>,
                                 em: ({ children }) => <em>{children}</em>,
+                                // 👇 Added inline code styling
+                                code: ({ children }) => (
+                                    <code className="bg-gray-200 rounded px-1 py-0.5 font-mono text-sm whitespace-pre-wrap">
+                                        {children}
+                                    </code>
+                                ),
                             },
-                        }} />
+                            // 👇 Added block-level code rendering
+                            types: {
+                                code: ({ value }) => (
+                                    <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto my-4 text-sm leading-relaxed">
+                                        <code>{value.code}</code>
+                                    </pre>
+                                ),
+                            },
+                        }}
+                    />
                     <div>
                         <p>Here is a test paragraph</p>
                         <ul>
