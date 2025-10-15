@@ -111,7 +111,7 @@ export default async function blogPage(
                                         <code>{value.code}</code>
                                     </pre>
                                 ),
-                                latex: ({ value }: any) => (
+                                latex: ({ value }) => (
                                     <MathBlock value={value?.body || value} inline={false} />
                                 ),
                             },
