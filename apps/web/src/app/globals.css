@@ -14,6 +14,8 @@
     --font-serif: var(--font-crimson-pro);
     --font-family-varela: var(--font-varela);
     --font-family-lora: var(--font-lora);
+    --font-family-dm-serif-display: var(--font-dm-serif-display);
+    --font-family-dm-sans: var(--font-dm-sans);
   }
 
   @media (prefers-color-scheme: dark) {
@@ -29,7 +31,7 @@
   }
 
   h1 {
-    font-family: var(--font-lora) !important;
+    font-family: var(--font-dm-serif-display) !important;
   }
 
   img {

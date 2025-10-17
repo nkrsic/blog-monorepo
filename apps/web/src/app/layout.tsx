@@ -1,9 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Crimson_Pro, Lora, Varela } from "next/font/google";
+import { Geist, Geist_Mono, Crimson_Pro, Lora, Varela, DM_Sans, DM_Serif_Display } from "next/font/google";
 import { SanityLive } from "@/sanity/live";
 import "./globals.css";
 
 // FONTS 
+
+const DMSans = DM_Sans({
+  variable: "--font-dm-sans",
+  subsets: ["latin"]
+});
+
+const DMSerifDisplay = DM_Serif_Display({
+  weight: "400",
+  variable: "--font-dm-serif-display",
+  subsets: ["latin"],
+});
 
 const lora = Lora({
   variable: "--font-lora",
@@ -44,9 +55,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${lora.variable} ${varela.variable}${geistMono.variable} ${geistSans.variable}`}>
+    <html lang="en" className={`${DMSans.variable} ${DMSerifDisplay.variable}`}>
       <body
-        className={`${geistMono.variable} ${varela.className} antialiased`}
+        className={`${geistMono.variable} ${DMSans.className} antialiased`}
       >
         {children}
         <SanityLive />
