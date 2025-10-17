@@ -70,11 +70,11 @@ export default async function blogPage(
                     <h1 className="font-bold">
                         {title}
                     </h1>
-                    <div className="relative w-full aspect-square overflow-hidden rounded-xl my-6">
+                    <div className="relative w-full aspect-square overflow-hidden rounded-xl">
                         <Image
                             src={imageUrl}
                             alt={"Event"}
-                            className="object-cover object-center rounded-xl"
+                            className="mt-0 mb-0 object-cover object-center rounded-xl"
                             fill
                             sizes="100vw"
                         />
