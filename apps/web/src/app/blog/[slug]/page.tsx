@@ -40,7 +40,7 @@ export default async function blogPage(
 
     const imageUrl = image
         ? urlFor(image)
-            .width(550)
+            .width(1200)
             .quality(80)
             .auto("format")
             .url()
@@ -70,14 +70,15 @@ export default async function blogPage(
                     <h1 className="font-bold">
                         {title}
                     </h1>
-
-                    <Image
-                        src={imageUrl}
-                        alt={"Event"}
-                        className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full"
-                        height="310"
-                        width="550"
-                    />
+                    <div className="relative w-full aspect-square overflow-hidden rounded-xl my-6">
+                        <Image
+                            src={imageUrl}
+                            alt={"Event"}
+                            className="object-cover object-center rounded-xl"
+                            fill
+                            sizes="100vw"
+                        />
+                    </div>
                     <PortableText
                         value={details ?? []}
                         components={{
