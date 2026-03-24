@@ -56,7 +56,33 @@ export type BlogPost = {
     level?: number;
     _type: "block";
     _key: string;
-  }>;
+  } | {
+    _key: string;
+  } & Code | {
+    _key: string;
+  } & Latex>;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
 };
 
 export type Event = {
@@ -148,6 +174,19 @@ export type Venue = {
   country?: string;
 };
 
+export type Latex = {
+  _type: "latex";
+  body?: string;
+};
+
+export type Code = {
+  _type: "code";
+  language?: string;
+  filename?: string;
+  code?: string;
+  highlightedLines?: Array<number>;
+};
+
 export type SanityImagePaletteSwatch = {
   _type: "sanity.imagePaletteSwatch";
   background?: string;
@@ -174,20 +213,15 @@ export type SanityImageDimensions = {
   aspectRatio?: number;
 };
 
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
+export type SanityImageMetadata = {
+  _type: "sanity.imageMetadata";
+  location?: Geopoint;
+  dimensions?: SanityImageDimensions;
+  palette?: SanityImagePalette;
+  lqip?: string;
+  blurHash?: string;
+  hasAlpha?: boolean;
+  isOpaque?: boolean;
 };
 
 export type SanityFileAsset = {
@@ -210,6 +244,13 @@ export type SanityFileAsset = {
   path?: string;
   url?: string;
   source?: SanityAssetSourceData;
+};
+
+export type SanityAssetSourceData = {
+  _type: "sanity.assetSourceData";
+  name?: string;
+  id?: string;
+  url?: string;
 };
 
 export type SanityImageAsset = {
@@ -235,17 +276,6 @@ export type SanityImageAsset = {
   source?: SanityAssetSourceData;
 };
 
-export type SanityImageMetadata = {
-  _type: "sanity.imageMetadata";
-  location?: Geopoint;
-  dimensions?: SanityImageDimensions;
-  palette?: SanityImagePalette;
-  lqip?: string;
-  blurHash?: string;
-  hasAlpha?: boolean;
-  isOpaque?: boolean;
-};
-
 export type Geopoint = {
   _type: "geopoint";
   lat?: number;
@@ -253,27 +283,18 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
-
-export type SanityAssetSourceData = {
-  _type: "sanity.assetSourceData";
-  name?: string;
-  id?: string;
-  url?: string;
-};
-
-export type AllSanitySchemaTypes = BlogPost | Event | Artist | Venue | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = BlogPost | SanityImageCrop | SanityImageHotspot | Slug | Event | Artist | Venue | Latex | Code | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../web/src/app/blog/[slug]/page.tsx
 // Variable: BLOG_QUERY
-// Query: *[    _type == "blogPost" &&    slug.current == $slug  ][0]{  title,  details}
+// Query: *[    _type == "blogPost" &&    slug.current == $slug  ][0]{  title,  details,  image,  headline->}
 export type BLOG_QUERYResult = {
   title: string | null;
   details: Array<{
+    _key: string;
+  } & Code | {
+    _key: string;
+  } & Latex | {
     children?: Array<{
       marks?: Array<string>;
       text?: string;
@@ -291,6 +312,39 @@ export type BLOG_QUERYResult = {
     _type: "block";
     _key: string;
   }> | null;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  headline: {
+    _id: string;
+    _type: "artist";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    name?: string;
+    description?: string;
+    photo?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  } | null;
 } | null;
 
 // Source: ../web/src/app/events/[slug]/page.tsx
@@ -305,7 +359,7 @@ export type EVENT_QUERYResult = {
   name?: string;
   slug?: Slug;
   eventType?: string;
-  date: string;
+  date: string | string;
   doorsOpen: number | 0;
   venue: {
     _id: string;
@@ -385,7 +439,7 @@ export type EVENTS_QUERYResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[\n    _type == \"blogPost\" &&\n    slug.current == $slug\n  ][0]{\n  title,\n  details\n}": BLOG_QUERYResult;
+    "*[\n    _type == \"blogPost\" &&\n    slug.current == $slug\n  ][0]{\n  title,\n  details,\n  image,\n  headline->\n}": BLOG_QUERYResult;
     "*[\n    _type == \"event\" &&\n    slug.current == $slug\n  ][0]{\n  ...,\n  \"date\": coalesce(date, now()),\n  \"doorsOpen\": coalesce(doorsOpen, 0),\n  headline->,\n  venue->\n}": EVENT_QUERYResult;
     "*[\n  _type == \"event\"\n]|order(date asc){_id, name, slug, date}": EVENTS_QUERYResult;
   }
